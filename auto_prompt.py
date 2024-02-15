@@ -39,26 +39,28 @@ def main(use_remote_computer):
                         successful = False
                         current_action = action_primitives[primitive_index]
                         full_prompt = prompt + ', ' + current_action
-                        print('Sending new prompt =')
-                        print(full_prompt)
+                        print(f'Sending new prompt = {full_prompt}')
                         prompt_socket.send_pyobj(full_prompt)
 
                     print('waiting to receive from action_status_socket')
                     action_status = action_status_socket.recv_pyobj()
                     print('received action_status =', action_status)
                     current_prompt = action_status['prompt']
+                    print(f'current action = {current_action}')
                     if current_action in current_prompt:
                         successful = action_status['successful']
                         if successful: 
                             print('Action primitive successful!')
                             primitive_index = primitive_index + 1
                     else:
-                        # new action hasn't started
+                        # The new action hasn't started. Make sure that it was received.
+                        full_prompt = prompt + ', ' + current_action
+                        print(f'Resending current prompt = {full_prompt}')
+                        prompt_socket.send_pyobj(full_prompt)
                         successful = False
             else:
                 prompt = input('Enter a full prompt for ForceSight. No primitives will be appended.:\n')
-                print('Sending new prompt =')
-                print(prompt)
+                print(f'Sending new prompt = {prompt}')
                 prompt_socket.send_pyobj(prompt)
             
     finally:
