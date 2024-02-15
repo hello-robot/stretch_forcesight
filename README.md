@@ -6,7 +6,7 @@ This is a repository for running a pretrained ForceSight model with D405 images 
 
 In spite of the significant limitations associated with running this model on Stretch 3, we believe it is functional enough at approaching and grasping objects to be informative, especially with respect to the ability of ForceSight to generalize to new embodiments and objects outside of the original robot training data. 
 
-The following GIFs show an example where a Stretch 3 running this code successfully approached and grasped a translucent cup on a glass-topped surface. **Failure is common, so be prepared!**
+The following GIFs show an example where a Stretch 3 running this code successfully approached and grasped a translucent cup on a glass-topped surface. **Please note that the lift action was a hand-coded hack executed when the system detected that the grasp action primitive was successful. The hack has been removed from the code.** **In general, failure is common, so be prepared!**
 
 | Stretch Moving to ForceSight Goals | Visualization of ForceSight Goals |
 | -------------------------- | ---------------------- |
