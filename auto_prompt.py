@@ -58,8 +58,8 @@ def main(use_remote_computer):
             else:
                 prompt = input('Enter a full prompt for ForceSight. No primitives will be appended.:\n')
                 print('Sending new prompt =')
-                print(full_prompt)
-                prompt_socket.send_pyobj(full_prompt)
+                print(prompt)
+                prompt_socket.send_pyobj(prompt)
             
     finally:
         pipeline.stop()
