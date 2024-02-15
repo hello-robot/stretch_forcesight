@@ -20,19 +20,21 @@ If you would like to modify, train, or test a ForceSight model or learn more abo
 
 This installation has been tested with Ubuntu 22.04.
 
-First, clone this repository on the robot and an off-board computer that you plan to run the deep model. The off-board computer should have a powerful GPU to achieve a high-enough rate to support closed-loop control. For example, in our testing we used a desktop with an NVIDIA GeForce RTX 4090 GPU and good WiFi connectivity to achieve 15 Hz, which is the frame rate of the D405 camera on Stretch 3. 
+First, clone this repository on the robot and an external computer that you plan to run the deep model. The external computer should have a powerful GPU to achieve a high-enough rate to support closed-loop control. For example, in our testing we used a desktop with an NVIDIA GeForce RTX 4090 GPU and good WiFi connectivity to achieve 15 Hz, which is the frame rate of the D405 camera on Stretch 3. 
 
 ```
 git clone https://github.com/hello-robot/forcesight_min/
 ```
 
-Next, edit `forcesight_networking.py` on your robot and your off-board computer to match your network configuration. 
+### Configure Your Network
 
-### Off-board Computer Installation
+Next, edit `forcesight_networking.py` on your robot and your external computer to match your network configuration. In particular, you need to specify the robot's IP address and the offboard computer's
+
+### External Computer Installation
 
 #### Download the Pretrained Model
 
-To use this repository, you will need to download a pretrained ForceSight model into the off-board computer's repository directory. The code has only been tested with `model_best.pth`. As of February 2, 2024, you can download this 1.29 GB model from [this OneDrive folder](https://onedrive.live.com/?authkey=%21ALvdUAiUg4s8LPY&id=79F9A071FA899B37%2179715&cid=79F9A071FA899B37).
+To use this repository, you will need to download a pretrained ForceSight model into the external computer's repository directory. The code has only been tested with `model_best.pth`. As of February 2, 2024, you can download this 1.29 GB model from [this OneDrive folder](https://onedrive.live.com/?authkey=%21ALvdUAiUg4s8LPY&id=79F9A071FA899B37%2179715&cid=79F9A071FA899B37).
 
 #### Create a Virtual Environment
 
@@ -73,26 +75,26 @@ First run the server that sends D405 images from the the robot by running the fo
 python3 send_d405_images.py -r
 ```
 
-Next, go to the repository's directory on the off-board computer and activate the virtual environment you set up. 
+Next, go to the repository's directory on the external computer and activate the virtual environment you set up. 
 
 ```
 cd ./stretch_forcesight
 source .venv/bin/activate
 ```
 
-Run the following client on the off-board computer to receive and process the images from the robot's D405. 
+Run the following client on the external computer to receive and process the images from the robot's D405. 
 
 ```
 python3 recv_and_forcesight_d405_images.py 
 ```
 
-To specify a text prompt for ForceSight,  open up another terminal on the off-board computer and run the following code.
+To specify a text prompt for ForceSight,  open up another terminal on the external computer and run the following code.
 
 ```
 python3 auto_prompt.py
 ```
 
-You should now be seeing visualizations of the ForceSight goals and the estimated fingertip poses on the off-board computer. They should look similar to the "Visualization of ForceSight Goals" GIF above.
+You should now be seeing visualizations of the ForceSight goals and the estimated fingertip poses on the external computer. They should look similar to the "Visualization of ForceSight Goals" GIF above.
 
 ## Moving the Robot to ForceSight Goals
 
