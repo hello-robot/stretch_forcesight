@@ -23,7 +23,7 @@ This installation has been tested with Ubuntu 22.04.
 First, clone this repository on the robot and an external computer that you plan to run the deep model. The external computer should have a powerful GPU to achieve a high-enough rate to support closed-loop control. For example, in our testing we used a desktop with an NVIDIA GeForce RTX 4090 GPU and good WiFi connectivity to achieve 15 Hz, which is the frame rate of the D405 camera on Stretch 3. 
 
 ```
-git clone https://github.com/hello-robot/forcesight_min/
+git clone https://github.com/hello-robot/stretch_forcesight/
 ```
 
 ### Configure Your Network
@@ -43,7 +43,7 @@ Next, create a Python virtual environment in the repository. You can learn about
 Examples of commands to run follow: 
 
 ```
-cd ./forcesight_min
+cd ./stretch_forcesight
 sudo apt install python3.10-venv
 python3 -m venv .venv
 source .venv/bin/activate
