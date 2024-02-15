@@ -28,7 +28,7 @@ git clone https://github.com/hello-robot/forcesight_min/
 
 ### Configure Your Network
 
-Next, edit `forcesight_networking.py` on your robot and your external computer to match your network configuration. In particular, you need to specify the robot's IP address and the offboard computer's
+Next, edit `forcesight_networking.py` on your robot and your external computer to match your network configuration. In particular, you need to specify the robot's IP address and the external computer's IP address.
 
 ### External Computer Installation
 
