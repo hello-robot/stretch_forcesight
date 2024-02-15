@@ -398,21 +398,6 @@ def main(use_remote_computer):
                             lift_force_goal = forcesight['applied_force_camera_n'][1]
 
 
-            if prompt is not None:
-                if "lift" in prompt:
-                    robot.lift.move_by(0.2)
-                    robot.push_command()
-                    time.sleep(2.0)
-                    
-                    print('*********** TOTAL SUCCESS!!!!!!!!!! ************')
-                    action_status = {
-                        'prompt': prompt,
-                        'successful': True
-                        }
-                    print('sending action status =')
-                    print(action_status)
-                    action_status_socket.send_pyobj(action_status)
-            
             regulate_socket_poll.run_after_polling()
 
             fingertip_left_pose = None
