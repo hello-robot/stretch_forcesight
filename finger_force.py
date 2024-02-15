@@ -60,6 +60,28 @@ class FingerForce:
             fingertip_pos.append([left_pos, right_pos])
 
         positions = [[g] + f[0] + f[1] for g,f in sorted(zip(grip_pos, fingertip_pos))]
+
+        # remove outliers
+        i_thresh = len(positions)
+        outlier_dist = 0.008
+        indices_to_remove = []
+        for i in range(len(positions)): 
+            if ((i - 1) > 0) and ((i + 1) <  i_thresh):
+                prev_finger_pos = np.array(positions[i-1][1:])
+                curr_finger_pos = np.array(positions[i][1:])
+                next_finger_pos = np.array(positions[i+1][1:])
+                total_dist = np.linalg.norm(prev_finger_pos - curr_finger_pos) + np.linalg.norm(next_finger_pos - curr_finger_pos)
+                if total_dist > outlier_dist:
+                    indices_to_remove.append(i)
+
+        num_outliers = len(indices_to_remove)
+        print(f'{num_outliers} fingertip pose outliers found of out {len(positions)} pairs of fingertip poses!')
+        print('indices_to_remove =', indices_to_remove)
+        print('removing outliers!')
+                    
+        for i in sorted(indices_to_remove, reverse=True):
+            del positions[i]
+            
         #print(f'positions = {positions}')
         self.pos_array = np.array(positions)
         #print(f'self.pos_array.shape = {self.pos_array.shape}')

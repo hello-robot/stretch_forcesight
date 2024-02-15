@@ -210,10 +210,6 @@ try:
                         exit()
                 
             
-        fingertip_origins_image = np.copy(aruco_detection_image)
-        aruco_to_fingertips.draw_fingertip_origins(fingertips, fingertip_origins_image, color_camera_info)
-        cv2.imshow('Fingertip Origins', fingertip_origins_image)
-        
         fingertip_frames_image = np.copy(color_image)
         aruco_to_fingertips.draw_fingertip_frames(fingertips, fingertip_frames_image, color_camera_info)
         cv2.imshow('Fingertip Frames', fingertip_frames_image)
@@ -233,17 +229,9 @@ try:
             #print('new_gripper_command =', new_gripper_command)
             prev_gripper_command = new_gripper_command
 
-        # Apply colormap on depth image (image must be converted to 8-bit per pixel first)
-        depth_colormap = cv2.applyColorMap(cv2.convertScaleAbs(depth_image, alpha=0.03), cv2.COLORMAP_JET)
-        images = np.hstack((color_image, depth_colormap))
-
-        # Show images
-        cv2.namedWindow('RealSense', cv2.WINDOW_AUTOSIZE)
-        cv2.imshow('RealSense', images)
         cv2.waitKey(1)
 
 finally:
 
-    # Stop streaming
     pipeline.stop()
     robot.stop()
