@@ -57,6 +57,7 @@ pip3 install --upgrade pip
 python3 -m pip --version
 pip3 install -r forcesight_min_requirements.txt
 pip3 install pyzmq
+pip3 install urchin
 ```
 
 ### Robot Installation
@@ -83,11 +84,13 @@ cd ./stretch_forcesight
 source .venv/bin/activate
 ```
 
-Run the following client on the external computer to receive and process the images from the robot's D405. 
+Run the following client on the external computer to receive and process the images from the robot's D405. The code can take significant time to run as it loads the model parameters, especially the first time.
 
 ```
 python3 recv_and_forcesight_d405_images.py 
 ```
+
+You should now be seeing visualizations of the estimated fingertip poses on the external computer. Initially, it starts in "Do Nothing" mode and no text prompt is provided to ForceSight.
 
 To specify a text prompt for ForceSight,  open up another terminal on the external computer and run the following code.
 
@@ -95,7 +98,22 @@ To specify a text prompt for ForceSight,  open up another terminal on the extern
 python3 auto_prompt.py
 ```
 
-You should now be seeing visualizations of the ForceSight goals and the estimated fingertip poses on the external computer. They should look similar to the "Visualization of ForceSight Goals" GIF above.
+Auto prompt can append action primitives automatically when the system detects that the previous action has succeeded. The system can detect when the approach action has succeeded and start the grasp action. Beyond this, automatic detection of completed actions does not work well enough on Stretch 3 to use. 
+
+We recommend that you start by providing the full prompt with an action primitive instead of having the system add the action primitives. ForceSight is also sensitive to the prompts with which it was trained. For example, you can try the following prompts one at a time.
+
+```
+pick up the cup, approach
+pick up the cup, grasp
+```
+
+Other prompts and objects can be found at the official ForceSight websites: 
+
+[https://github.com/force-sight/forcesight](https://github.com/force-sight/forcesight)
+
+[https://force-sight.github.io/](https://force-sight.github.io/)
+
+After specifying a prompt that applies to an object currently in the D405's field of view, you should see visualizations of the ForceSight goals on the external computer. They should look similar to the "Visualization of ForceSight Goals" GIF above.
 
 ## Moving the Robot to ForceSight Goals
 
