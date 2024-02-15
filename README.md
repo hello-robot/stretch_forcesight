@@ -56,6 +56,7 @@ Now install the required Python packages in the virtual environment you created.
 pip3 install --upgrade pip
 python3 -m pip --version
 pip3 install -r forcesight_min_requirements.txt
+pip3 install pyzmq
 ```
 
 ### Robot Installation
